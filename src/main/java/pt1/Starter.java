@@ -13,12 +13,30 @@ public class Starter {
         * */
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
         // Now we need to retrieve bean from spring container.
-        Coach coach = context.getBean("baseBallCoach",BaseBallCoach.class);
+
+        // At this moment whenever we call context.getBean Spring come to BaseBallCoach instance a deliver everything for use
+        // This happens cuz by default Spring Container shares the bean and not creating it, this process called Singleton Scope
+        // If we want to tell the Spring every time to create new instance of a bean we need to declare Scope to Prototype.
+        //
+        Coach coach = context.getBean("baseBallCoach",Coach.class);
+
+        //Let's get another bean from a container but at this time with Scope = Prototype, and take a look what is going on
+        Coach coach1 = context.getBean("baseBallCoach",Coach.class);
+
+        Coach coach2 = context.getBean("someKindOfACoach",Coach.class);
         // calling method from bean
         coach.getDailyWorkout();
 
         System.out.println(coach.atYourService());
+        System.out.println("My email is: " + ((BaseBallCoach) coach).getEmail()+"\nMy name is " + ((BaseBallCoach) coach).getFirstName()
+                + " " + ((BaseBallCoach) coach).getLastName());
         // and finally close the context.
+        boolean result  = coach==coach1;
+
+        System.out.println("Result " + result);
+        System.out.println("Memory location for coach " +  coach);
+        System.out.println("Memory location for coach1 " + coach1);
+        System.out.println("Memory location for coach2 " + coach2);
         context.close();
 
     }

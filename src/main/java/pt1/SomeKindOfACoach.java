@@ -1,30 +1,30 @@
 package pt1;
 
-public class BaseBallCoach implements Coach {
+public class SomeKindOfACoach implements Coach {
     private SimpleService simpleService;
     private String email;
     private String firstName;
     private String lastName;
 
     // defining a constructor for dependency injection
-    public BaseBallCoach(SimpleService simpleService){
+    public SomeKindOfACoach(SimpleService simpleService){
         this.simpleService=simpleService;
     }
     // defining no-arg constructor just because compiler is no longer creating it for us
-    public BaseBallCoach(){
+    public SomeKindOfACoach(){
 
     }
 
     /*
-    * There is another way to inject dependency, you can do it with setters
-    *
-    *
-    * EXAMPLE:
-    * public void setYourService(SimpleService simpleService){
-    * this.simpleService = simpleService
-    * }
-    *
-    * */
+     * There is another way to inject dependency, you can do it with setters
+     *
+     *
+     * EXAMPLE:
+     * public void setYourService(SimpleService simpleService){
+     * this.simpleService = simpleService
+     * }
+     *
+     * */
 
     public void getDailyWorkout() {
         System.out.println("Do some workout, now!");
@@ -58,3 +58,5 @@ public class BaseBallCoach implements Coach {
         this.lastName = lastName;
     }
 }
+
+

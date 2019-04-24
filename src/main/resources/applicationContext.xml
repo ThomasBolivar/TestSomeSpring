@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:context="http://www.springframework.org/schema/context"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
-    http://www.springframework.org/schema/beans/spring-beans.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context.xsd">
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/context
+ http://www.springframework.org/schema/context/spring-context.xsd"
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns="http://www.springframework.org/schema/beans">
 
+	<!-- load the properties file: info.properties -->
+	<context:property-placeholder location="classpath:info.properties"/>
 
     <!-- Define your beans here -->
-
+<!-- as i mentioned in other comments by default Spring uses Singletone Scope, you can manually declare it by using: scope = "singleton" etc-->
    		 <bean id="baseBallCoach"
-    		class="pt1.BaseBallCoach">
+    		class="pt1.BaseBallCoach"
+		 scope="prototype"
+		 >
 			 <constructor-arg ref="myService"/>
+			 <property name="email" value="thomas.bolivarr@gmail.com"/>
+			 <!-- Now we are getting values from a file "info.properties"-->
+			 <property name="firstName" value="${some.firstName}"/>
+			 <property name="lastName" value="${some.lastName}"/>
 		 </bean>
-
+		<bean id="someKindOfACoach"
+		  class="pt1.SomeKindOfACoach"
+		  scope="prototype"
+	>
+		<constructor-arg ref="myService"/>
+		<property name="email" value="thomas.bolivarr@gmail.com"/>
+		<!-- Now we are getting values from a file "info.properties"-->
+		<property name="firstName" value="${some.firstName}"/>
+		<property name="lastName" value="${some.lastName}"/>
+	</bean>
 		<bean id="myService"
 		class="pt1.SimpleServiceImplementation">
 		</bean>
@@ -31,6 +48,7 @@
 	so in our case the whole picture inside Spring will be looking like:
 	BaseBallCoach baseBallCoach = new BaseBallCoach();
 	baseBallCoach.setService(MyService);
+	same thing with Values, whenever we call property Spring will set "Value" to named property
 
 	-->
 

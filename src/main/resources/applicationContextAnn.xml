@@ -9,7 +9,6 @@
 
 	<!-- load the properties file: info.properties -->
 	<context:property-placeholder location="classpath:info.properties"/>
-
     <!-- Define your beans here -->
 	<!-- By declaring <context: component-scan we telling to Spring to look up for class which contains @Component annotation,
 	grab him and creat bean. We are no longer need in XML hard coding, Spring will do everything for us :) -->

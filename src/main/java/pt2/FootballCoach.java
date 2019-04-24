@@ -2,6 +2,7 @@ package pt2;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 // Spring will search for this annotation to create a bean
@@ -11,6 +12,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class FootballCoach implements Coach {
 
+    @Value("${some.firstName}")
+    private String firstName;
+
+    @Value("${some.lastName}")
+    private String lastName;
     // @Autowired annotation allows Spring to resolve and inject collaborating beans into your bean.
     // since Spring 4 you can even not use that annotation on top of the constructor if there is only one constructor,
     // you can even use Autowired with private fields and setters.
@@ -18,7 +24,7 @@ public class FootballCoach implements Coach {
 
     // If we are not specifying @Qualifier annotation there is going to be NoUniqueBeanDefinitionException, this heppens cuz we
     // have two classes which implements SomeService interface, and whenever Spring tries to inject it he doesn't know which one to pick
-
+    // If we are using Qualifier with Constructor, we have to write it inside of a constructor where arguments are, look at example below
     // @Qualifier declares which one to use.
     @Autowired
     @Qualifier("randomService")
@@ -27,7 +33,7 @@ public class FootballCoach implements Coach {
 
     /*
     @Autowired
-    public FootballCoach (SomeService someService){
+    public FootballCoach (@Qualifier("randomService") SomeService someService){
         this.someService=someService;
     }
     */
@@ -49,5 +55,21 @@ public class FootballCoach implements Coach {
     public String getSomething() {
 
         return someService.getSomething();
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

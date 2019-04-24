@@ -10,12 +10,12 @@ public class Starter {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContextAnn.xml");
 
         // Then we grab a bean from Spring Container
-        Coach coach = context.getBean(Coach.class);
+        FootballCoach coach = context.getBean("footballCoach",FootballCoach.class);
 
         // Proceeding with operations (Call a method)
         System.out.println(coach.doSomething());
 
-        System.out.println(coach.getSomething());
+        System.out.println(coach.getSomething() + " " + coach.getFirstName() + " " + coach.getLastName());
 
         //Don't forget to close the context
         context.close();

@@ -16,6 +16,8 @@ public class Starter {
         Coach coach = context.getBean("baseBallCoach",BaseBallCoach.class);
         // calling method from bean
         coach.getDailyWorkout();
+
+        System.out.println(coach.atYourService());
         // and finally close the context.
         context.close();
 

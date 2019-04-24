@@ -12,7 +12,27 @@
 
    		 <bean id="baseBallCoach"
     		class="pt1.BaseBallCoach">
-    	</bean>
+			 <constructor-arg ref="myService"/>
+		 </bean>
+
+		<bean id="myService"
+		class="pt1.SimpleServiceImplementation">
+		</bean>
+
+	<!-- If we want to use setter injection we need to define property for our helper object(dependency)
+	EXAMPLE:
+	<bean id = "baseBallCoach"
+		class = "pt1.BaseBallCoach">
+		<property name = "service" ref="myService"/>
+	</bean>
+
+	Spring will actually get the property name and will do something like this:
+	public void setService (..)
+	so in our case the whole picture inside Spring will be looking like:
+	BaseBallCoach baseBallCoach = new BaseBallCoach();
+	baseBallCoach.setService(MyService);
+
+	-->
 
 
 

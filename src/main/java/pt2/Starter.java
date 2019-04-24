@@ -1,6 +1,8 @@
 package pt2;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
+
 
 public class Starter {
     public static void main(String[] args) {
@@ -8,12 +10,12 @@ public class Starter {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContextAnn.xml");
 
         // Then we grab a bean from Spring Container
-        Coach coach = context.getBean("footballCoach",Coach.class);
+        Coach coach = context.getBean(Coach.class);
 
         // Proceeding with operations (Call a method)
         System.out.println(coach.doSomething());
 
-        coach.getSomething();
+        System.out.println(coach.getSomething());
 
         //Don't forget to close the context
         context.close();
